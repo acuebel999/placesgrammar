@@ -1,0 +1,295 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>It or They? Animal Grammar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Andika:wght@400;700&display=swap">
+<style>
+/* Layout: one big "stage" card for the projector, level tabs on top, giant answer buttons below. Single bright classroom look. */
+:root{
+  --bg:#e9f5ee; --panel:#ffffff; --ink:#1f2a24; --muted:#56655c;
+  --leaf:#1f7a4d; --leaf-soft:#d3eedd; --magenta:#c2187a; --sun:#ffd23f;
+  --ok:#2e8b3a; --no:#d6332b; --line:#c5dccd;
+  --display:'Baloo 2', 'Trebuchet MS', system-ui, sans-serif;
+  --body:'Andika', 'Comic Sans MS', system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:14px 28px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.4vw,46px);line-height:1;margin:0;color:var(--leaf);text-wrap:balance}
+h1 span{color:var(--magenta)}
+.score{font-family:var(--display);font-weight:800;font-size:22px;background:var(--panel);border:3px solid var(--line);border-radius:999px;padding:4px 16px;display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+.score .star{color:#e0a800}
+nav{display:flex;flex-wrap:wrap;gap:8px}
+nav button{font-family:var(--display);font-weight:700;font-size:17px;border:3px solid var(--line);background:var(--panel);color:var(--ink);border-radius:14px;padding:6px 14px;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:8px}
+nav button .lv{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--leaf-soft);color:var(--leaf);align-items:center;justify-content:center;font-size:15px}
+nav button[aria-current="true"]{border-color:var(--leaf);background:var(--leaf);color:#fff}
+nav button[aria-current="true"] .lv{background:#fff;color:var(--leaf)}
+nav button:focus-visible,.ans:focus-visible,.tile:focus-visible,.tool:focus-visible{outline:4px solid var(--magenta);outline-offset:2px}
+.stage{background:var(--panel);border:4px solid var(--line);border-radius:28px;padding:18px clamp(14px,3vw,30px) 22px;display:flex;flex-direction:column;gap:14px;align-items:center;min-width:0}
+.goal{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.6vw,28px);text-align:center;margin:0;text-wrap:balance}
+.goal small{display:block;font-family:var(--body);font-weight:400;font-size:16px;color:var(--muted)}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dots i{width:14px;height:14px;border-radius:50%;background:var(--line);display:block}
+.dots i.done{background:var(--leaf)} .dots i.miss{background:var(--sun)} .dots i.now{outline:3px solid var(--magenta);outline-offset:1px}
+.scene{display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,30px);flex-wrap:wrap;min-height:190px}
+.pics{display:flex;gap:8px;align-items:center}
+.pics svg{width:clamp(110px,18vw,170px);height:auto;display:block}
+.pics.two svg{width:clamp(90px,14vw,140px)}
+.clue{display:flex;flex-direction:column;align-items:center;gap:4px;background:#f6fbf8;border:3px dashed var(--line);border-radius:20px;padding:10px 22px}
+.mark{font-family:var(--display);font-weight:800;font-size:64px;line-height:1}
+.mark.ok{color:var(--ok)} .mark.no{color:var(--no)} .mark.q{color:var(--magenta)}
+.word{font-family:var(--display);font-weight:700;font-size:30px}
+.sentence{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,44px);text-align:center;min-height:1.3em;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px}
+.gap{display:inline-block;min-width:110px;border-bottom:5px solid var(--magenta);text-align:center;color:var(--magenta)}
+.answers{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;width:100%}
+.ans{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.4vw,38px);min-width:170px;min-height:76px;padding:6px 26px;border-radius:22px;border:4px solid var(--leaf);background:#fff;color:var(--leaf);cursor:pointer;box-shadow:0 6px 0 var(--leaf);transition:transform .08s}
+.ans:active{transform:translateY(4px);box-shadow:0 2px 0 var(--leaf)}
+.ans.wide{min-width:min(100%,360px);font-size:clamp(22px,3vw,32px)}
+.ans.right{background:var(--ok);border-color:var(--ok);color:#fff;box-shadow:0 6px 0 #1d5e26}
+.ans.wrong{background:#fde3e1;border-color:var(--no);color:var(--no);box-shadow:0 6px 0 var(--no)}
+.ans[disabled]{cursor:default}
+.build{width:100%;display:flex;flex-direction:column;gap:12px;align-items:center}
+.slot{min-height:84px;width:100%;max-width:820px;border:4px dashed var(--line);border-radius:20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:8px;background:#fbfdfb}
+.slot.right{border-color:var(--ok);background:#e9f7ec} .slot.wrong{border-color:var(--no);background:#fdf0ef}
+.bank{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.tile{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,32px);min-height:62px;min-width:62px;padding:2px 18px;border-radius:14px;border:3px solid #999;cursor:pointer;color:var(--ink)}
+.tile.s{background:#d9ecff;border-color:#6ea7de} .tile.v{background:#ffe0dc;border-color:#e08a80} .tile.n{background:#e6e6e6;border-color:#9a9a9a}
+.tile.a{background:#ddf3d6;border-color:#7fbf6e} .tile.p{background:#fff3b0;border-color:#d8b93a} .tile.x{background:#f1e6fb;border-color:#a77bd0}
+.tile.used{visibility:hidden}
+.tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.tool{font-family:var(--display);font-weight:700;font-size:18px;min-height:48px;padding:4px 18px;border-radius:14px;border:3px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.tool.go{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.feedback{min-height:64px;width:100%;max-width:820px;border-radius:18px;padding:10px 16px;font-size:20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.feedback.good{background:#e1f4e5;color:#1d5e26} .feedback.bad{background:#fdecea;color:#9c241e} .feedback.hint{background:#fff7d1;color:#6b5400}
+.feedback b{font-family:var(--display);font-size:24px}
+.next{font-family:var(--display);font-weight:800;font-size:22px;min-height:56px;padding:4px 26px;border-radius:16px;border:none;background:var(--magenta);color:#fff;cursor:pointer}
+.rule{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-size:17px;color:var(--muted)}
+.rule span{background:var(--panel);border:2px solid var(--line);border-radius:999px;padding:4px 14px}
+.rule b{color:var(--ink)}
+.done-card{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.done-card .big{font-family:var(--display);font-weight:800;font-size:56px;color:var(--leaf);line-height:1}
+.stars{font-size:46px;color:#e0a800;letter-spacing:6px}
+footer{font-size:15px;color:var(--muted);text-align:center}
+@media (max-width:560px){.ans{min-width:130px;min-height:64px}.scene{min-height:150px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+.pop{animation:pop .35s ease-out}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>It or <span>They</span>?</h1>
+    <div class="score" aria-live="polite"><span class="star">★</span><span id="score">0</span></div>
+  </header>
+  <nav id="levels" aria-label="Levels"></nav>
+  <main class="stage" id="stage"></main>
+  <div class="rule" id="rule"></div>
+  <footer>Unit 1 · Animals · Lesson 6 — sin contracciones: <b>is not</b>, <b>are not</b>.</footer>
+</div>
+
+<script>
+const SVG = {"snake": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><ellipse cx=\"100\" cy=\"166\" rx=\"72\" ry=\"24\" fill=\"#f2b134\"/><ellipse cx=\"102\" cy=\"142\" rx=\"56\" ry=\"20\" fill=\"#f2b134\"/><path d=\"M80 140 Q90 110 118 112 Q138 112 134 90 Q130 74 116 70\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"30\"/><path d=\"M80 140 Q90 110 118 112 Q138 112 134 90 Q130 74 116 70\" fill=\"none\" stroke=\"#f2b134\" stroke-width=\"22\"/><circle cx=\"60\" cy=\"172\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><circle cx=\"95\" cy=\"178\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><circle cx=\"135\" cy=\"172\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><circle cx=\"70\" cy=\"146\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><circle cx=\"110\" cy=\"150\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><circle cx=\"140\" cy=\"144\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><circle cx=\"120\" cy=\"118\" r=\"5\" fill=\"#7a4a1c\" stroke-width=\"3\"/><ellipse cx=\"110\" cy=\"58\" rx=\"34\" ry=\"26\" fill=\"#f2b134\"/><circle cx=\"100\" cy=\"50\" r=\"9\" fill=\"#fff\"/><circle cx=\"101\" cy=\"51\" r=\"4.95\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"102.5\" cy=\"48.5\" r=\"1.8\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"124\" cy=\"50\" r=\"9\" fill=\"#fff\"/><circle cx=\"125\" cy=\"51\" r=\"4.95\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"126.5\" cy=\"48.5\" r=\"1.8\" fill=\"#fff\" stroke=\"none\"/><path d=\"M96 70 Q112 80 128 68\" fill=\"none\"/><path d=\"M142 62 L160 62 M160 62 L168 55 M160 62 L168 69\" fill=\"none\" stroke=\"#e23a3a\" stroke-width=\"3.5\"/></svg>", "parrot": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M86 140 L66 196 L84 194 L98 148 Z\" fill=\"#2f7fd6\"/><path d=\"M98 144 L94 198 L110 192 L110 146 Z\" fill=\"#e8403a\"/><ellipse cx=\"100\" cy=\"112\" rx=\"34\" ry=\"46\" fill=\"#e8403a\"/><path d=\"M78 92 Q62 136 90 162 Q114 132 104 96 Z\" fill=\"#ffd23f\"/><path d=\"M82 128 Q80 150 92 160 Q104 146 100 128 Z\" fill=\"#2f7fd6\" stroke-width=\"3\"/><circle cx=\"114\" cy=\"58\" r=\"30\" fill=\"#e8403a\"/><ellipse cx=\"124\" cy=\"54\" rx=\"13\" ry=\"11\" fill=\"#fff\"/><circle cx=\"126\" cy=\"54\" r=\"5\" fill=\"#2b2b2b\" stroke=\"none\"/><path d=\"M140 46 Q166 50 160 80 Q152 70 140 70 Z\" fill=\"#f2e6c9\"/><path d=\"M140 70 Q150 72 152 80 Q144 84 138 76 Z\" fill=\"#f2e6c9\"/><rect x=\"34\" y=\"156\" width=\"140\" height=\"14\" rx=\"7\" fill=\"#9b6b43\"/><path d=\"M92 156 q-4 10 4 12 M110 156 q-4 10 4 12\" fill=\"none\" stroke-width=\"3\"/></svg>", "worm": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M30 140 Q55 100 80 140 Q105 180 130 140 Q148 110 160 104\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"34\"/><path d=\"M30 140 Q55 100 80 140 Q105 180 130 140 Q148 110 160 104\" fill=\"none\" stroke=\"#f4a3a8\" stroke-width=\"26\"/><path d=\"M48 120 l10 10\" fill=\"none\" stroke-width=\"3\"/><path d=\"M72 128 l-8 12\" fill=\"none\" stroke-width=\"3\"/><path d=\"M100 158 l12 -4\" fill=\"none\" stroke-width=\"3\"/><path d=\"M124 150 l12 6\" fill=\"none\" stroke-width=\"3\"/><circle cx=\"164\" cy=\"100\" r=\"24\" fill=\"#f4a3a8\"/><circle cx=\"156\" cy=\"94\" r=\"7\" fill=\"#fff\"/><circle cx=\"157\" cy=\"95\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"158.5\" cy=\"92.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"174\" cy=\"94\" r=\"7\" fill=\"#fff\"/><circle cx=\"175\" cy=\"95\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"176.5\" cy=\"92.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><path d=\"M156 110 Q166 118 176 110\" fill=\"none\" stroke-width=\"3\"/></svg>", "butterfly": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M98 96 C60 40 10 40 18 82 C24 112 70 112 98 104 Z\" fill=\"#ff9a2e\"/><path d=\"M102 96 C140 40 190 40 182 82 C176 112 130 112 102 104 Z\" fill=\"#ff9a2e\"/><path d=\"M98 108 C66 112 34 134 50 160 C66 180 94 150 98 118 Z\" fill=\"#ffd23f\"/><path d=\"M102 108 C134 112 166 134 150 160 C134 180 106 150 102 118 Z\" fill=\"#ffd23f\"/><circle cx=\"52\" cy=\"76\" r=\"12\" fill=\"#2b2b2b\"/><circle cx=\"148\" cy=\"76\" r=\"12\" fill=\"#2b2b2b\"/><circle cx=\"66\" cy=\"146\" r=\"8\" fill=\"#2b2b2b\"/><circle cx=\"134\" cy=\"146\" r=\"8\" fill=\"#2b2b2b\"/><rect x=\"92\" y=\"70\" width=\"16\" height=\"96\" rx=\"8\" fill=\"#5a4636\"/><circle cx=\"100\" cy=\"64\" r=\"13\" fill=\"#5a4636\"/><path d=\"M95 54 Q86 32 74 28 M105 54 Q114 32 126 28\" fill=\"none\"/><circle cx=\"74\" cy=\"28\" r=\"4\" fill=\"#2b2b2b\"/><circle cx=\"126\" cy=\"28\" r=\"4\" fill=\"#2b2b2b\"/><circle cx=\"95\" cy=\"62\" r=\"2.5\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"105\" cy=\"62\" r=\"2.5\" fill=\"#fff\" stroke=\"none\"/></svg>", "scorpion": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M86 112 L60 104 L50 116\" fill=\"none\"/><path d=\"M86 124 L58 124 L48 140\" fill=\"none\"/><path d=\"M88 136 L64 146 L58 162\" fill=\"none\"/><path d=\"M114 112 L140 104 L150 116\" fill=\"none\"/><path d=\"M114 124 L142 124 L152 140\" fill=\"none\"/><path d=\"M112 136 L136 146 L142 162\" fill=\"none\"/><path d=\"M100 150 Q100 192 136 186 Q170 178 164 140 Q160 118 144 116\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"24\"/><path d=\"M100 150 Q100 192 136 186 Q170 178 164 140 Q160 118 144 116\" fill=\"none\" stroke=\"#c0502a\" stroke-width=\"16\"/><path d=\"M146 118 L126 96 L156 104 Z\" fill=\"#2b2b2b\"/><path d=\"M88 96 Q60 84 54 60\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"14\"/><path d=\"M88 96 Q60 84 54 60\" fill=\"none\" stroke=\"#c0502a\" stroke-width=\"7\"/><path d=\"M112 96 Q140 84 146 60\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"14\"/><path d=\"M112 96 Q140 84 146 60\" fill=\"none\" stroke=\"#c0502a\" stroke-width=\"7\"/><path d=\"M54 60 C30 58 28 26 50 22 C46 34 52 40 62 40 C62 30 72 24 78 30 C76 44 70 58 54 60 Z\" fill=\"#c0502a\"/><path d=\"M146 60 C170 58 172 26 150 22 C154 34 148 40 138 40 C138 30 128 24 122 30 C124 44 130 58 146 60 Z\" fill=\"#c0502a\"/><ellipse cx=\"100\" cy=\"124\" rx=\"18\" ry=\"32\" fill=\"#c0502a\"/><path d=\"M84 116 H116 M84 132 H116\" fill=\"none\" stroke-width=\"3\"/><ellipse cx=\"100\" cy=\"94\" rx=\"18\" ry=\"14\" fill=\"#c0502a\"/><circle cx=\"93\" cy=\"92\" r=\"5\" fill=\"#fff\"/><circle cx=\"94\" cy=\"93\" r=\"2.75\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"95.5\" cy=\"90.5\" r=\"1.0\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"107\" cy=\"92\" r=\"5\" fill=\"#fff\"/><circle cx=\"108\" cy=\"93\" r=\"2.75\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"109.5\" cy=\"90.5\" r=\"1.0\" fill=\"#fff\" stroke=\"none\"/></svg>", "dog": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M150 120 Q176 100 170 80\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"14\"/><path d=\"M150 120 Q176 100 170 80\" fill=\"none\" stroke=\"#e2b27a\" stroke-width=\"7\"/><rect x=\"70\" y=\"140\" width=\"18\" height=\"44\" rx=\"8\" fill=\"#e2b27a\"/><rect x=\"96\" y=\"140\" width=\"18\" height=\"44\" rx=\"8\" fill=\"#e2b27a\"/><rect x=\"124\" y=\"140\" width=\"18\" height=\"44\" rx=\"8\" fill=\"#e2b27a\"/><rect x=\"146\" y=\"140\" width=\"18\" height=\"44\" rx=\"8\" fill=\"#e2b27a\"/><ellipse cx=\"112\" cy=\"134\" rx=\"52\" ry=\"30\" fill=\"#e2b27a\"/><ellipse cx=\"44\" cy=\"80\" rx=\"14\" ry=\"30\" fill=\"#9b6b43\"/><ellipse cx=\"108\" cy=\"80\" rx=\"14\" ry=\"30\" fill=\"#9b6b43\"/><circle cx=\"76\" cy=\"80\" r=\"36\" fill=\"#e2b27a\"/><ellipse cx=\"76\" cy=\"100\" rx=\"20\" ry=\"14\" fill=\"#ffffff\"/><ellipse cx=\"76\" cy=\"93\" rx=\"8\" ry=\"6\" fill=\"#2b2b2b\"/><circle cx=\"64\" cy=\"74\" r=\"7\" fill=\"#fff\"/><circle cx=\"65\" cy=\"75\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"66.5\" cy=\"72.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"88\" cy=\"74\" r=\"7\" fill=\"#fff\"/><circle cx=\"89\" cy=\"75\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"90.5\" cy=\"72.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><path d=\"M70 108 Q76 114 82 108\" fill=\"none\" stroke-width=\"3\"/></svg>", "frog": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><ellipse cx=\"48\" cy=\"160\" rx=\"34\" ry=\"20\" fill=\"#7cc943\"/><ellipse cx=\"152\" cy=\"160\" rx=\"34\" ry=\"20\" fill=\"#7cc943\"/><ellipse cx=\"100\" cy=\"140\" rx=\"56\" ry=\"44\" fill=\"#7cc943\"/><ellipse cx=\"100\" cy=\"150\" rx=\"34\" ry=\"28\" fill=\"#c9ea8f\"/><path d=\"M72 160 Q66 182 52 186 M72 160 Q72 184 64 190 M128 160 Q134 182 148 186 M128 160 Q128 184 136 190\" fill=\"none\"/><ellipse cx=\"100\" cy=\"96\" rx=\"64\" ry=\"40\" fill=\"#7cc943\"/><circle cx=\"68\" cy=\"62\" r=\"22\" fill=\"#7cc943\"/><circle cx=\"132\" cy=\"62\" r=\"22\" fill=\"#7cc943\"/><circle cx=\"68\" cy=\"62\" r=\"12\" fill=\"#fff\"/><circle cx=\"69\" cy=\"63\" r=\"6.6000000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"70.5\" cy=\"60.5\" r=\"2.4000000000000004\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"132\" cy=\"62\" r=\"12\" fill=\"#fff\"/><circle cx=\"133\" cy=\"63\" r=\"6.6000000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"134.5\" cy=\"60.5\" r=\"2.4000000000000004\" fill=\"#fff\" stroke=\"none\"/><path d=\"M76 104 Q100 124 124 104\" fill=\"none\"/><circle cx=\"62\" cy=\"100\" r=\"6\" fill=\"#ffb3c1\" stroke=\"none\"/><circle cx=\"138\" cy=\"100\" r=\"6\" fill=\"#ffb3c1\" stroke=\"none\"/></svg>", "dolphin": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M58 132 Q36 120 22 126 Q30 140 40 146 Q34 160 40 176 Q54 162 64 150 Z\" fill=\"#5f9fd6\"/><path d=\"M92 66 Q96 30 124 38 Q110 50 114 62 Z\" fill=\"#5f9fd6\"/><path d=\"M58 150 Q64 84 120 60 Q150 50 166 64 L190 70 Q192 78 184 80 L166 82 Q150 106 118 116 Q84 126 58 150 Z\" fill=\"#5f9fd6\"/><path d=\"M166 82 Q150 106 118 116 Q90 124 72 138 Q96 104 140 92 Q156 88 166 82 Z\" fill=\"#d6ebfa\" stroke-width=\"3\"/><path d=\"M112 104 Q110 128 94 136 Q98 118 98 110 Z\" fill=\"#5f9fd6\"/><circle cx=\"150\" cy=\"70\" r=\"8\" fill=\"#fff\"/><circle cx=\"151\" cy=\"71\" r=\"4.4\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"152.5\" cy=\"68.5\" r=\"1.6\" fill=\"#fff\" stroke=\"none\"/><path d=\"M170 80 Q176 84 184 80\" fill=\"none\" stroke-width=\"3\"/><path d=\"M22 66 Q30 58 38 66 M34 86 Q42 78 50 86 M168 132 Q176 124 184 132\" fill=\"none\" stroke=\"#5aa9e6\" stroke-width=\"3\"/></svg>", "lizard": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M100 132 Q102 170 70 178 Q44 184 40 166\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"24\"/><path d=\"M100 132 Q102 170 70 178 Q44 184 40 166\" fill=\"none\" stroke=\"#8bd14a\" stroke-width=\"16\"/><path d=\"M88 78 Q66 72 58 56\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"16\"/><path d=\"M88 78 Q66 72 58 56\" fill=\"none\" stroke=\"#8bd14a\" stroke-width=\"9\"/><path d=\"M112 78 Q134 72 142 56\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"16\"/><path d=\"M112 78 Q134 72 142 56\" fill=\"none\" stroke=\"#8bd14a\" stroke-width=\"9\"/><path d=\"M88 116 Q66 124 58 140\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"16\"/><path d=\"M88 116 Q66 124 58 140\" fill=\"none\" stroke=\"#8bd14a\" stroke-width=\"9\"/><path d=\"M112 116 Q134 124 142 140\" fill=\"none\" stroke=\"#2b2b2b\" stroke-width=\"16\"/><path d=\"M112 116 Q134 124 142 140\" fill=\"none\" stroke=\"#8bd14a\" stroke-width=\"9\"/><circle cx=\"58\" cy=\"52\" r=\"5\" fill=\"#8bd14a\"/><circle cx=\"142\" cy=\"52\" r=\"5\" fill=\"#8bd14a\"/><circle cx=\"56\" cy=\"144\" r=\"5\" fill=\"#8bd14a\"/><circle cx=\"144\" cy=\"144\" r=\"5\" fill=\"#8bd14a\"/><ellipse cx=\"100\" cy=\"98\" rx=\"22\" ry=\"42\" fill=\"#8bd14a\"/><circle cx=\"100\" cy=\"84\" r=\"5\" fill=\"#4f8f24\" stroke-width=\"3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#4f8f24\" stroke-width=\"3\"/><circle cx=\"100\" cy=\"116\" r=\"5\" fill=\"#4f8f24\" stroke-width=\"3\"/><ellipse cx=\"100\" cy=\"46\" rx=\"20\" ry=\"24\" fill=\"#8bd14a\"/><circle cx=\"90\" cy=\"40\" r=\"7\" fill=\"#fff\"/><circle cx=\"91\" cy=\"41\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"92.5\" cy=\"38.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"110\" cy=\"40\" r=\"7\" fill=\"#fff\"/><circle cx=\"111\" cy=\"41\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"112.5\" cy=\"38.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><path d=\"M92 58 Q100 64 108 58\" fill=\"none\" stroke-width=\"3\"/></svg>", "spider": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M100 100 Q60 60 30 80\" fill=\"none\"/><path d=\"M100 110 Q50 96 22 116\" fill=\"none\"/><path d=\"M100 120 Q54 128 28 156\" fill=\"none\"/><path d=\"M100 128 Q66 156 50 186\" fill=\"none\"/><path d=\"M100 100 Q140 60 170 80\" fill=\"none\"/><path d=\"M100 110 Q150 96 178 116\" fill=\"none\"/><path d=\"M100 120 Q146 128 172 156\" fill=\"none\"/><path d=\"M100 128 Q134 156 150 186\" fill=\"none\"/><ellipse cx=\"100\" cy=\"128\" rx=\"34\" ry=\"30\" fill=\"#6b5b95\"/><circle cx=\"100\" cy=\"90\" r=\"22\" fill=\"#6b5b95\"/><circle cx=\"92\" cy=\"88\" r=\"7\" fill=\"#fff\"/><circle cx=\"93\" cy=\"89\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"94.5\" cy=\"86.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"108\" cy=\"88\" r=\"7\" fill=\"#fff\"/><circle cx=\"109\" cy=\"89\" r=\"3.8500000000000005\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"110.5\" cy=\"86.5\" r=\"1.4000000000000001\" fill=\"#fff\" stroke=\"none\"/><path d=\"M92 102 Q100 108 108 102\" fill=\"none\" stroke-width=\"3\"/></svg>", "fish": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" stroke=\"#2b2b2b\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M150 100 L186 72 L182 128 Z\" fill=\"#ff9a2e\"/><ellipse cx=\"96\" cy=\"100\" rx=\"64\" ry=\"40\" fill=\"#ff9a2e\"/><path d=\"M120 64 Q130 100 120 136\" fill=\"none\" stroke-width=\"3\"/><circle cx=\"62\" cy=\"92\" r=\"9\" fill=\"#fff\"/><circle cx=\"63\" cy=\"93\" r=\"4.95\" fill=\"#2b2b2b\" stroke=\"none\"/><circle cx=\"64.5\" cy=\"90.5\" r=\"1.8\" fill=\"#fff\" stroke=\"none\"/><path d=\"M36 108 Q44 114 52 110\" fill=\"none\" stroke-width=\"3\"/></svg>"};
+const FACTS = {
+  snake:{yes:['long','dangerous','scary'],no:['friendly','noisy','colourful']},
+  parrot:{yes:['colourful','noisy'],no:['slimy','quiet','dangerous']},
+  worm:{yes:['slimy','small','long'],no:['dangerous','noisy','big']},
+  butterfly:{yes:['colourful','small','quiet'],no:['dangerous','slimy','noisy']},
+  scorpion:{yes:['dangerous','scary','small'],no:['friendly','colourful','slimy']},
+  dog:{yes:['friendly','noisy'],no:['slimy','small']},
+  frog:{yes:['slimy','green','small'],no:['big','scary']},
+  dolphin:{yes:['big','friendly'],no:['scary','small','slimy']},
+  lizard:{yes:['small'],no:['big','noisy','slimy']},
+  spider:{yes:['small','scary'],no:['big','noisy']},
+  fish:{yes:['quiet','small'],no:['noisy','scary']}
+};
+const ANIMALS = Object.keys(FACTS);
+const ROUNDS = 8;
+const LEVELS = [
+  {id:'who', name:'It or They?', goal:'How many animals? Choose <b>It</b> or <b>They</b>.', es:'1 animal → It · 2 animales → They'},
+  {id:'verb', name:'is or are?', goal:'Choose <b>is</b> or <b>are</b>.', es:'It → is · They → are'},
+  {id:'pick', name:'✔ or ✘', goal:'Look at the clue. Choose the right sentence.', es:'✔ → It is … · ✘ → It is not …'},
+  {id:'build', name:'Build it!', goal:'Tap the words in order to build the sentence.', es:'Toca las palabras en orden. ✔ afirmativa · ✘ con not'},
+  {id:'ask', name:'Ask and answer', goal:'Build the question. Then choose the answer.', es:'Is it …? · Are they …? → Yes, it is. / No, it is not.'}
+];
+const RULES = {
+  who:['<b>1</b> animal → <b>It</b>','<b>2</b> animals → <b>They</b>'],
+  verb:['<b>It</b> → <b>is</b>','<b>They</b> → <b>are</b>'],
+  pick:['✔ <b>It is</b> big.','✘ <b>It is not</b> big.','✔ <b>They are</b> big.','✘ <b>They are not</b> big.'],
+  build:['It · is · not · big · .','They · are · noisy · .'],
+  ask:['<b>Is</b> it slimy? → Yes, it is. / No, it is not.','<b>Are</b> they noisy? → Yes, they are. / No, they are not.']
+};
+
+let state = {level:0, round:0, score:0, results:[], item:null, locked:false, built:[]};
+const $ = s => document.querySelector(s);
+const rnd = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = a => { const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; };
+
+let actx=null;
+function beep(good){
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    const notes = good ? [660,880] : [300,220];
+    notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type='triangle';o.frequency.value=f;
+      g.gain.setValueAtTime(.0001,actx.currentTime+i*.12);g.gain.exponentialRampToValueAtTime(.25,actx.currentTime+i*.12+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+i*.12+.18);o.connect(g).connect(actx.destination);o.start(actx.currentTime+i*.12);o.stop(actx.currentTime+i*.12+.2);});
+  }catch(e){}
+}
+
+function makeItem(){
+  const a = rnd(ANIMALS), many = Math.random()<.5, f = FACTS[a];
+  const pos = Math.random()<.5 || !f.no.length;
+  const adj = pos ? rnd(f.yes) : rnd(f.no);
+  return {a, many, pos, adj, subj: many?'They':'It', verb: many?'are':'is'};
+}
+function picsHTML(it){ return `<div class="pics ${it.many?'two':''}" role="img" aria-label="${it.many?'two':'one'} ${it.a}${it.many?'s':''}">${SVG[it.a]}${it.many?SVG[it.a]:''}</div>`; }
+function clueHTML(m, word){ const c = m==='ok'?'ok':m==='no'?'no':'q'; const s = m==='ok'?'✔':m==='no'?'✘':'?'; return `<div class="clue"><span class="mark ${c}">${s}</span>${word?`<span class="word">${word}</span>`:''}</div>`; }
+function sentenceOf(it){ return `${it.subj} ${it.verb} ${it.pos?'':'not '}${it.adj}.`; }
+function questionOf(it){ return `${it.many?'Are they':'Is it'} ${it.adj}?`; }
+function answerOf(it, yes){ return it.many ? (yes?'Yes, they are.':'No, they are not.') : (yes?'Yes, it is.':'No, it is not.'); }
+
+function renderNav(){
+  $('#levels').innerHTML = LEVELS.map((l,i)=>`<button type="button" data-l="${i}" aria-current="${i===state.level}"><span class="lv">${i+1}</span>${l.name}</button>`).join('');
+  $('#levels').querySelectorAll('button').forEach(b=>b.onclick=()=>startLevel(+b.dataset.l));
+  $('#rule').innerHTML = RULES[LEVELS[state.level].id].map(r=>`<span>${r}</span>`).join('');
+}
+function dots(){ return `<div class="dots" aria-hidden="true">${Array.from({length:ROUNDS},(_,i)=>`<i class="${state.results[i]===true?'done':state.results[i]===false?'miss':''} ${i===state.round?'now':''}"></i>`).join('')}</div>`; }
+function header(){ const L = LEVELS[state.level]; return `<p class="goal">${L.goal}<small>${L.es}</small></p>${dots()}`; }
+
+function startLevel(i){ state.level=i; state.round=0; state.results=[]; renderNav(); newRound(); }
+function newRound(){
+  if(state.round>=ROUNDS) return finish();
+  state.item = makeItem(); state.locked=false; state.built=[]; state.firstTry=true;
+  ({who:rWho, verb:rVerb, pick:rPick, build:rBuild, ask:rAsk})[LEVELS[state.level].id]();
+}
+function feedback(kind, html, withNext){
+  const fb = $('#fb'); fb.className = 'feedback '+kind+' pop'; fb.innerHTML = `<span>${html}</span>` + (withNext?` <button class="next" id="next" type="button">Next ➜</button>`:'');
+  if(withNext){ const n=$('#next'); n.onclick=()=>{state.round++; newRound();}; n.focus(); }
+}
+function scored(ok){
+  if(state.results[state.round]===undefined) state.results[state.round] = ok && state.firstTry;
+  if(ok && state.firstTry){ state.score++; $('#score').textContent=state.score; }
+  if(!ok) state.firstTry=false;
+  beep(ok);
+}
+function choose(btn, ok, okMsg, badMsg){
+  if(state.locked) return;
+  if(ok){ btn.classList.add('right'); state.locked=true; scored(true);
+    document.querySelectorAll('.ans').forEach(b=>b.disabled=true); feedback('good', okMsg, true); }
+  else { btn.classList.add('wrong'); btn.disabled=true; scored(false); feedback('bad', badMsg, false); }
+}
+function answersHTML(opts, wide){ return `<div class="answers">${opts.map((o,i)=>`<button type="button" class="ans ${wide?'wide':''}" data-i="${i}">${o}</button>`).join('')}</div>`; }
+
+/* Level 1 */
+function rWho(){
+  const it=state.item;
+  $('#stage').innerHTML = header() + `<div class="scene">${picsHTML(it)}</div><div class="sentence"><span class="gap">?</span> …</div>` + answersHTML(['It','They']) + `<div class="feedback" id="fb"></div>`;
+  document.querySelectorAll('.ans').forEach(b=>b.onclick=()=>{
+    const pick=b.textContent; const ok = pick===it.subj;
+    choose(b, ok, `<b>${it.subj}!</b> ${it.many?'Two animals → They.':'One animal → It.'}`, `Count again: ${it.many?'there are <b>two</b> animals.':'there is <b>one</b> animal.'}`);
+    if(ok) $('.gap').textContent=it.subj;
+  });
+}
+/* Level 2 */
+function rVerb(){
+  const it=state.item;
+  $('#stage').innerHTML = header() + `<div class="scene">${picsHTML(it)}</div><div class="sentence">${it.subj} <span class="gap">?</span> ${it.pos?'':'not '}${it.adj}.</div>` + answersHTML(['is','are']) + `<div class="feedback" id="fb"></div>`;
+  document.querySelectorAll('.ans').forEach(b=>b.onclick=()=>{
+    const ok = b.textContent===it.verb;
+    choose(b, ok, `<b>${sentenceOf(it)}</b>`, `<b>${it.subj}</b> goes with <b>${it.verb}</b>.`);
+    if(ok) $('.gap').textContent=it.verb;
+  });
+}
+/* Level 3 */
+function rPick(){
+  const it=state.item;
+  const right = sentenceOf(it);
+  const wrongNeg = `${it.subj} ${it.verb} ${it.pos?'not ':''}${it.adj}.`;
+  const otherSubj = it.many ? 'It is' : 'They are';
+  const wrongSubj = `${otherSubj} ${it.pos?'':'not '}${it.adj}.`;
+  const opts = shuffle([right, wrongNeg, wrongSubj]);
+  $('#stage').innerHTML = header() + `<div class="scene">${picsHTML(it)}${clueHTML(it.pos?'ok':'no', it.adj)}</div>` + answersHTML(opts, true) + `<div class="feedback" id="fb"></div>`;
+  document.querySelectorAll('.ans').forEach(b=>b.onclick=()=>{
+    const t=b.textContent, ok=t===right;
+    let why = t===wrongNeg ? (it.pos?'Look: ✔ → no <b>not</b>.':'Look: ✘ → use <b>not</b>.') : (it.many?'Two animals → <b>They are</b>.':'One animal → <b>It is</b>.');
+    choose(b, ok, `<b>${right}</b>`, why);
+  });
+}
+/* tiles */
+function tileHTML(w,k,i){ return `<button type="button" class="tile ${k}" data-i="${i}" data-w="${w}">${w}</button>`; }
+function kindOf(w){ if(/^(It|They|it|they)$/.test(w)) return 's'; if(/^(is|are|Is|Are)$/.test(w)) return 'v'; if(w==='not') return 'n'; if(w==='.'||w==='?') return 'p'; return 'a'; }
+function builder(target, extras, onDone){
+  const words = shuffle(target.concat(extras));
+  $('#bank').innerHTML = words.map((w,i)=>tileHTML(w,kindOf(w),i)).join('');
+  const slot=$('#slot'); state.built=[];
+  const draw=()=>{ slot.className='slot'; slot.innerHTML = state.built.length? state.built.map(b=>`<span class="tile ${kindOf(b.w)}" style="cursor:default">${b.w}</span>`).join('') : '<span style="color:var(--muted)">Tap the words…</span>'; };
+  draw();
+  $('#bank').querySelectorAll('.tile').forEach(t=>t.onclick=()=>{ if(state.locked) return; t.classList.add('used'); state.built.push({w:t.dataset.w, el:t}); draw(); });
+  $('#undo').onclick=()=>{ if(state.locked) return; const b=state.built.pop(); if(b) b.el.classList.remove('used'); draw(); };
+  $('#clear').onclick=()=>{ if(state.locked) return; state.built.forEach(b=>b.el.classList.remove('used')); state.built=[]; draw(); };
+  $('#check').onclick=()=>{ if(state.locked) return;
+    const got = state.built.map(b=>b.w).join(' '), want = target.join(' ');
+    if(got===want){ slot.className='slot right pop'; onDone(true); }
+    else { slot.className='slot wrong pop'; onDone(false, got); }
+  };
+}
+function buildUI(){ return `<div class="build"><div class="slot" id="slot" aria-live="polite"></div><div class="bank" id="bank"></div><div class="tools"><button type="button" class="tool" id="undo">↶ Undo</button><button type="button" class="tool" id="clear">Clear</button><button type="button" class="tool go" id="check">Check ✔</button></div></div>`; }
+function hintFor(it, got, q){
+  const w = got.split(' ');
+  if(q){ if(w[0]!==(it.many?'Are':'Is')) return `A question starts with <b>${it.many?'Are':'Is'}</b>.`; if(w[w.length-1]!=='?') return 'A question ends with <b>?</b>'; return `Try: <b>${it.many?'Are':'Is'}</b> + <b>${it.many?'they':'it'}</b> + ${it.adj} + ?`; }
+  if(w[0]!==it.subj) return it.many?'Two animals → start with <b>They</b>.':'One animal → start with <b>It</b>.';
+  if(w[1]!==it.verb) return `<b>${it.subj}</b> goes with <b>${it.verb}</b>.`;
+  if(!it.pos && w[2]!=='not') return '✘ → you need <b>not</b>.';
+  if(it.pos && w.includes('not')) return '✔ → no <b>not</b>.';
+  if(w[w.length-1]!=='.') return 'Finish with a full stop <b>.</b>';
+  return 'Check the order of the words.';
+}
+/* Level 4 */
+function rBuild(){
+  const it=state.item;
+  const target = [it.subj, it.verb].concat(it.pos?[]:['not']).concat([it.adj,'.']);
+  const extras = [it.many?'is':'are', it.pos?'not':(it.many?'It':'They')];
+  $('#stage').innerHTML = header() + `<div class="scene">${picsHTML(it)}${clueHTML(it.pos?'ok':'no', it.adj)}</div>` + buildUI() + `<div class="feedback" id="fb"></div>`;
+  builder(target, extras, (ok, got)=>{
+    if(ok){ state.locked=true; scored(true); feedback('good', `<b>${target.join(' ').replace(' .','.')}</b> Well done!`, true); }
+    else { scored(false); feedback('hint', hintFor(it, got, false), false); }
+  });
+}
+/* Level 5 */
+function rAsk(){
+  const it=state.item;
+  const target = [it.many?'Are':'Is', it.many?'they':'it', it.adj, '?'];
+  const extras = [it.many?'Is':'Are', it.many?'it':'they', '.'];
+  $('#stage').innerHTML = header() + `<div class="scene">${picsHTML(it)}${clueHTML('q', it.adj)}</div>` + buildUI() + `<div id="ansZone" style="width:100%"></div><div class="feedback" id="fb"></div>`;
+  builder(target, extras, (ok, got)=>{
+    if(!ok){ scored(false); feedback('hint', hintFor(it, got, true), false); return; }
+    state.locked=true;
+    feedback('good', `<b>${questionOf(it)}</b> Now answer! Look at the picture.`, false);
+    const opts = shuffle([answerOf(it,true), answerOf(it,false)]);
+    $('#ansZone').innerHTML = answersHTML(opts, true);
+    document.querySelectorAll('#ansZone .ans').forEach(b=>b.onclick=()=>{
+      const right = answerOf(it, it.pos);
+      const okA = b.textContent===right;
+      if(okA){ b.classList.add('right'); document.querySelectorAll('#ansZone .ans').forEach(x=>x.disabled=true); scored(true); feedback('good', `<b>${questionOf(it)} ${right}</b>`, true); }
+      else { b.classList.add('wrong'); b.disabled=true; scored(false); feedback('bad', it.pos?`Is the ${it.a} ${it.adj}? Yes!`:`Is the ${it.a} ${it.adj}? No!`, false); }
+    });
+  });
+}
+function finish(){
+  const good = state.results.filter(x=>x===true).length;
+  const stars = good>=7?3:good>=5?2:1;
+  const next = state.level < LEVELS.length-1;
+  $('#stage').innerHTML = `<div class="done-card pop"><div class="big">${good} / ${ROUNDS}</div><div class="stars" aria-label="${stars} stars">${'★'.repeat(stars)}<span style="color:var(--line)">${'★'.repeat(3-stars)}</span></div>
+    <p class="goal">${good>=7?'Excellent!':good>=5?'Very good!':'Good try! Play again.'}<small>Primer intento correcto en ${good} de ${ROUNDS}.</small></p>
+    <div class="answers"><button type="button" class="ans" id="again">Play again</button>${next?`<button type="button" class="ans" id="nextL">Level ${state.level+2} ➜</button>`:''}</div></div>`;
+  $('#again').onclick=()=>startLevel(state.level);
+  if(next) $('#nextL').onclick=()=>startLevel(state.level+1);
+  beep(true);
+}
+renderNav(); newRound();
+</script>
+
+</body></html>
